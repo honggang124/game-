@@ -32,3 +32,8 @@ src-tauri/binaries/
 *.njsproj
 *.sln
 *.sw?
+
+# build artifacts
+target
+src-bridge/speedpatch/build32/
+build-log.txt

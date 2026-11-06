@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>谢谢你的爱</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    overflow: hidden;
+    user-select: none;
+    cursor: default;
+  }
+  .lines { text-align: center; padding: 24px; }
+  .row { line-height: 1.2; white-space: nowrap; }
+  .word {
+    display: inline-block;
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "SimHei", sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, 12vw, 150px);
+    animation-duration: 2.6s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    text-shadow: 0 6px 0 rgba(0, 0, 0, 0.35), 0 0 28px currentColor;
+  }
+  .word.comma {
+    font-size: clamp(40px, 8vw, 100px);
+    animation: none;
+    text-shadow: none;
+    color: rgba(255, 255, 255, 0.55);
+    vertical-align: baseline;
+    padding: 0 0.05em;
+  }
+  /* 每个字不同糖果色 + 不同延迟，奇偶字分别弹跳/摇摆 */
+  .word:nth-child(odd)  { animation-name: bounce; }
+  .word:nth-child(even) { animation-name: swing; }
+  .c1 { color: #ff6b6b; } .c2 { color: #ffd93d; } .c3 { color: #6bcb77; }
+  .c4 { color: #4d96ff; } .c5 { color: #ff8fab; } .c6 { color: #f7b32b; }
+  .c7 { color: #2ec4b6; } .c8 { color: #e71d36; } .c9 { color: #b388eb; }
+  .c10 { color: #43aa8b; } .c11 { color: #f94144; }
+  .word:nth-of-type(1)  { animation-delay: 0s; }
+  .word:nth-of-type(2)  { animation-delay: 0.12s; }
+  .word:nth-of-type(3)  { animation-delay: 0.24s; }
+  .word:nth-of-type(4)  { animation-delay: 0.36s; }
+  .word:nth-of-type(5)  { animation-delay: 0.48s; }
+  .word:nth-of-type(7)  { animation-delay: 0.72s; }
+  .word:nth-of-type(8)  { animation-delay: 0.84s; }
+  .word:nth-of-type(9)  { animation-delay: 0.96s; }
+  .word:nth-of-type(10) { animation-delay: 1.08s; }
+  .word:nth-of-type(11) { animation-delay: 1.2s; }
+  .word:nth-of-type(12) { animation-delay: 1.32s; }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%      { transform: translateY(-16px) rotate(2deg); }
+  }
+  @keyframes swing {
+    0%, 100% { transform: rotate(3deg); }
+    50%      { transform: rotate(-3deg) translateY(-10px); }
+  }
+  .heart {
+    display: inline-block;
+    font-size: clamp(28px, 5vw, 60px);
+    color: #ff4d6d;
+    margin-top: 0.4em;
+    animation: pulse 1.4s ease-in-out infinite;
+    text-shadow: 0 0 24px rgba(255, 77, 109, 0.8);
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.25); }
+  }
+</style>
+</head>
+<body>
+  <div class="lines">
+    <div class="row">
+      <span class="word c1">谢</span><span class="word c2">谢</span><span class="word c3">你</span><span class="word c4">的</span><span class="word c5">爱</span><span class="word comma">，</span>
+    </div>
+    <div class="row">
+      <span class="word c6">钱</span><span class="word c7">不</span><span class="word c8">钱</span><span class="word c9">无</span><span class="word c10">所</span><span class="word c11">谓</span>
+    </div>
+    <div><span class="heart">&#10084;</span></div>
+  </div>
+</body>
+</html>

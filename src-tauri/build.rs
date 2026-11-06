@@ -98,7 +98,12 @@ fn build_project(
     match target_arch {
         "x86_64" => {
             build_cmake_crate(manifest_dir, profile, project_dir, bin_prefix, "64", file_ext);
-            build_cmake_command(manifest_dir, profile, project_dir, "Win32", bin_prefix, "32", file_ext, build_subdir);
+            // 32-bit cross-arch requires MSVC generator (`-A Win32`); skip when MinGW toolchain
+            if env::var("OPENSPEEDY_SKIP_32BIT").map(|v| v != "0").unwrap_or(false) {
+                println!("cargo:warning=OPENSPEEDY_SKIP_32BIT set — skipping 32-bit {} build", bin_prefix);
+            } else {
+                build_cmake_command(manifest_dir, profile, project_dir, "Win32", bin_prefix, "32", file_ext, build_subdir);
+            }
         }
         "x86" => {
             build_cmake_crate(manifest_dir, profile, project_dir, bin_prefix, "32", file_ext);

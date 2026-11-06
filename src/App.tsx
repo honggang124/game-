@@ -26,9 +26,29 @@ import { useSnackbar } from "./contexts/SnackbarContext";
 import { useInterval } from "ahooks";
 import { invoke } from "@tauri-apps/api/core";
 import { open } from "@tauri-apps/plugin-shell";
+import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { revealItemInDir } from "@tauri-apps/plugin-opener";
 import BugReportIcon from "@mui/icons-material/BugReport";
 import { reportError } from "./utils/frontendLog";
+
+// 打开"谢谢你的爱"弹窗（替代外部赞助链接）
+async function showThanksWindow() {
+  const existing = await WebviewWindow.getByLabel("thanks");
+  if (existing) {
+    await existing.setFocus();
+    return;
+  }
+  new WebviewWindow("thanks", {
+    url: "thanks.html",
+    title: "谢谢你的爱",
+    width: 900,
+    height: 620,
+    center: true,
+    resizable: true,
+    minWidth: 480,
+    minHeight: 360,
+  });
+}
 
 function App() {
   const { t } = useTranslation();
@@ -256,7 +276,7 @@ function App() {
 
                   <Box sx={{ display: "flex", gap: 1.5, flexWrap: "wrap", justifyContent: "center" }}>
                     <IconButton
-                      onClick={() => open("https://store.steampowered.com/app/5010920/OpenSpeedy")}
+                      onClick={() => open("https://hongni.lovestoblog.com/")}
                       title={t("about.socialSteam")}
                       aria-label={t("about.socialSteam")}
                       sx={{
@@ -269,7 +289,7 @@ function App() {
                       <Box component="img" src={steamIcon} sx={{ width: 22, height: 22 }} />
                     </IconButton>
                     <IconButton
-                      onClick={() => open("https://github.com/game1024")}
+                      onClick={() => open("https://github.com/honggang124/code-main-cc")}
                       title={t("about.socialGithub")}
                       aria-label={t("about.socialGithub")}
                       sx={{
@@ -282,7 +302,7 @@ function App() {
                       <Box component="img" src={githubIcon} sx={{ width: 22, height: 22}} />
                     </IconButton>
                     <IconButton
-                      onClick={() => open("https://buymeacoffee.com/game1024")}
+                      onClick={showThanksWindow}
                       title={t("about.socialBmc")}
                       aria-label={t("about.socialBmc")}
                       sx={{

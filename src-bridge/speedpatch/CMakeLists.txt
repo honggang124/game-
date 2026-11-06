@@ -53,9 +53,18 @@ target_link_libraries(${TARGET_NAME} PRIVATE minhook winmm)
 target_compile_definitions(${TARGET_NAME} PRIVATE SPEEDPATCH_LIBRARY _CRT_SECURE_NO_WARNINGS)
 
 # shared section for factor
-set_target_properties(${TARGET_NAME} PROPERTIES
-    LINK_FLAGS "/SECTION:shared,RWS"
-)
+if(MSVC)
+    set_target_properties(${TARGET_NAME} PROPERTIES
+        LINK_FLAGS "/SECTION:shared,RWS"
+    )
+else()
+    message(STATUS "Non-MSVC build: /SECTION:shared,RWS skipped (shared memory for factor disabled)")
+endif()
+
+if(NOT MSVC)
+    # GNU ld prefixes SHARED libs with "lib"; match MSVC naming (speedpatch64.dll)
+    set_target_properties(${TARGET_NAME} PROPERTIES PREFIX "")
+endif()
 
 # install 目标 — cmake crate 需要
 include(GNUInstallDirs)

@@ -24,6 +24,7 @@
 #include "speedpatch.h"
 #include <atomic>
 #include <mmsystem.h>
+#include <mutex>
 #include <shared_mutex>
 #pragma comment(lib, "winmm.lib")
 #pragma data_seg("shared")
